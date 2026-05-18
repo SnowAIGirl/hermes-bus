@@ -45,7 +45,7 @@ def _recv_msg(sock: socket.socket) -> Optional[dict]:
             if not chunk:
                 return None
             header += chunk
-    except (ConnectionResetError, BrokenPipeError, ConnectionAbortedError):
+    except (ConnectionResetError, BrokenPipeError, ConnectionAbortedError, OSError):
         return None
 
     payload_len = struct.unpack(">I", header)[0]
@@ -59,7 +59,7 @@ def _recv_msg(sock: socket.socket) -> Optional[dict]:
             if not chunk:
                 return None
             payload += chunk
-    except (ConnectionResetError, BrokenPipeError, ConnectionAbortedError):
+    except (ConnectionResetError, BrokenPipeError, ConnectionAbortedError, OSError):
         return None
 
     try:
