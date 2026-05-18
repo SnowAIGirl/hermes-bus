@@ -78,7 +78,8 @@ def _is_socket_alive() -> bool:
     try:
         sock.connect(str(SOCKET_PATH))
         _send_msg(sock, {"type": "list_endpoints"})
-        reply = _recv_msg(sock, timeout=1.5)
+        sock.settimeout(1.5)
+        reply = _recv_msg(sock)
         sock.close()
         return reply is not None and reply.get("type") == "endpoints_list"
     except socket.timeout:
