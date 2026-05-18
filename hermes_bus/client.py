@@ -79,7 +79,7 @@ def _send_msg(sock: socket.socket, msg: dict):
 
 # ── Short-lived: send one message then disconnect ────────────────────────
 
-def send_message(to: str, body: dict, socket_path: str = None) -> bool:
+def send_message(to: str, body: dict, socket_path: str = None, from_ep: str = "anonymous") -> bool:
     """Short-lived: connect to bus → send one message → disconnect.
 
     No endpoint registration, no endpoint_map entry.
@@ -106,7 +106,7 @@ def send_message(to: str, body: dict, socket_path: str = None) -> bool:
     msg = {
         "type": "message",
         "to": to,
-        "from": "anonymous",
+        "from": from_ep,
         "id": str(uuid.uuid4()),
         "ts": time.time(),
         "body": body,

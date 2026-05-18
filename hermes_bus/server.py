@@ -14,7 +14,7 @@ Hook configuration:
        e.g. export HERMES_BUS_HOOKS="/path/to/hook1.py,/path/to/hook2.py"
        Set to empty or "none" to disable all hooks.
     2. Config file hermes-bus/hooks.yaml — hooks list
-    3. Default: auto-discover ../hermes-notify/bus_callback.py
+    3. Default: none (route processing is handled by hermes-bus-plugin)
 """
 import json
 import os
@@ -52,7 +52,7 @@ def _resolve_hook_scripts() -> list[str]:
     Priority:
       1. HERMES_BUS_HOOKS env var (comma-separated list or JSON array)
       2. hermes-bus/hooks.yaml config file
-      3. Default: hermes-notify/bus_callback.py (if exists)
+      3. Default: none (route processing is handled by hermes-bus-plugin)
     """
     home = _get_home()
 
@@ -85,11 +85,6 @@ def _resolve_hook_scripts() -> list[str]:
                 return hooks
         except Exception:
             pass
-
-    # 3. Default: hermes-notify/bus_callback.py
-    default_hook = os.path.join(home, "hermes-notify", "bus_callback.py")
-    if os.path.exists(default_hook):
-        return [default_hook]
 
     return []
 

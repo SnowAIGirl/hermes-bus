@@ -58,42 +58,8 @@ def _log(msg: str):
         pass
 
 
-# ── Protocol helpers (4-byte length prefix + JSON body) ───────────────
-
-
-def _send_msg(sock: socket.socket, msg: dict):
-    data = json.dumps(msg, ensure_ascii=False).encode("utf-8")
-    header = struct.pack(">I", len(data))
-    try:
-        sock.sendall(header + data)
-    except Exception:
-        pass
-
-
-def _recv_msg(sock: socket.socket, timeout: float = 2.0) -> Optional[dict]:
-    sock.settimeout(timeout)
-    try:
-        header = b""
-        while len(header) < 4:
-            chunk = sock.recv(4 - len(header))
-            if not chunk:
-                return None
-            header += chunk
-        payload_len = struct.unpack(">I", header)[0]
-        if payload_len > 10 * 1024 * 1024:
-            return None
-        payload = b""
-        while len(payload) < payload_len:
-            chunk = sock.recv(payload_len - len(payload))
-            if not chunk:
-                return None
-            payload += chunk
-        return json.loads(payload.decode("utf-8"))
-    except socket.timeout:
-        return None
-    except Exception as e:
-        _log(f"recv_msg error: {type(e).__name__}: {e}")
-        return None
+# ── Protocol helpers (from client.py) ────────────────────────────────
+from hermes_bus.client import _send_msg, _recv_msg
 
 
 # ── Daemon Management ──────────────────────────────────────────────

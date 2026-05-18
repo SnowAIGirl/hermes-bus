@@ -6,4 +6,4 @@
 #   export HERMES_BUS_HOOKS="/path/to/hook1.py,/path/to/hook2.py"
 #   Set to "none" to disable all hooks.
 
-- ~/.hermes/hermes-notify/bus_callback.py  # default; users should customize
+#- ~/.hermes/hermes-notify/bus_callback.py  # removed — routing handled by hermes-bus-plugin

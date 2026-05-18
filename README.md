@@ -72,7 +72,7 @@ After each message is routed, hook scripts are triggered asynchronously. Resolut
 
 1. `HERMES_BUS_HOOKS` env var (comma-separated or JSON array of script paths)
 2. `hooks.yaml` config file
-3. Default: auto-discover `hermes-notify/bus_callback.py`
+3. Default: none (routing handled by hermes-bus-plugin)
 
 Each hook receives the full message JSON on stdin. Hook execution is non-blocking — the bus continues routing.
 

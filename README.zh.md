@@ -56,6 +56,6 @@ send_message("target-service", {"text": "hello", "type": "ack"})
 
 1. `HERMES_BUS_HOOKS` 环境变量
 2. `hooks.yaml` 配置文件
-3. 默认自动发现 `hermes-notify/bus_callback.py`
+3. 默认：无（路由由 hermes-bus-plugin 处理）
 
 每个 hook 从 stdin 接收完整消息 JSON，不阻塞主消息循环。
