@@ -1,0 +1,37 @@
+[project]
+name = "hermes-bus"
+version = "0.1.0"
+description = "Generic message bus transport — Unix Socket message routing, session management, heartbeat"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "LinQuan", email = "i@linquan.name"}]
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Networking",
+]
+
+[project.urls]
+homepage = "https://github.com/mlinquan/hermes-bus"
+repository = "https://github.com/mlinquan/hermes-bus"
+
+[project.scripts]
+hermes-bus-server = "hermes_bus.server:main"
+hermes-busd = "hermes_bus.busd:main"
+
+[tool.setuptools.packages.find]
+include = ["hermes_bus*"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
